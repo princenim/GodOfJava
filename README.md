@@ -1,2 +1,2 @@
-# GodOfJava
-자바의 신 예제 풀이
+# ✔️GodOfJava
+자바의 신 예제 실습 
