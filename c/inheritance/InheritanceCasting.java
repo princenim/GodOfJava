@@ -1,4 +1,4 @@
-package c.inherence;
+package c.inheritance;
 
 /**
  * @author hazel
