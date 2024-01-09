@@ -11,11 +11,7 @@ public class Calculator {
             calculator.printDivide(1, 0);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-
-
         }
-
-
     }
 
     public void printDivide(double d1, double d2) throws Exception {
