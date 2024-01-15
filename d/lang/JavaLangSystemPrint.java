@@ -1,4 +1,4 @@
-package d.string.practice.lang;
+package d.lang;
 
 /**
  * @author hazel
