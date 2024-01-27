@@ -26,21 +26,22 @@ public class FileSizeSummary {
         System.out.println(path + "'s total size= " + sum);
     }
 
+    //파일의 크기 출력
     public long printFileSize(String dirName) {
         File dir = new File(dirName);
         long sum = 0;
-        if (dir.isDirectory()) {
-            //디렉토리일때
+        if (dir.isDirectory()) {//디렉토리일때
             File[] fileList = dir.listFiles();
             for (File file : fileList) {
-                if (file.isFile()) {
-                    String tmpFileName = file.getAbsolutePath();
-                    long length = file.length();
+                if (file.isFile()) { //디렉토리안의 파일일때
+                    String tmpFileName = file.getAbsolutePath(); //파일의 절대경로
+                    long length = file.length(); //파일의 길이
                     System.out.println(tmpFileName + "=" + length);
                     sum += length;
-                } else {
-                    //디렉토리일때
+                } else { //디렉토리안에 디렉토리 일때
+                    System.out.println("=================");
                     String tmpDirName = file.getAbsolutePath();
+                    System.out.println(tmpDirName);
                     long fileLength = printFileSize(tmpDirName);
                     printInfo(tmpDirName, fileLength, true);
                     sum += fileLength;
