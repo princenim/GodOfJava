@@ -1,6 +1,8 @@
 package e.network;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.Date;
@@ -13,11 +15,13 @@ public class SocketClientSample {
     public static void main(String[] args) {
         SocketClientSample sample = new SocketClientSample();
         sample.sendSocketSample();
+
     }
 
     public void sendSocketSample() {
         for (int i = 0; i < 3; i++) {
-            sendSocketData("i like java at" + new Date());
+            //sendSocketData("i like java at" + new Date());
+            sendAndReceiveSocketData("I like java at +" + new Date());
         }
         sendSocketData("EXIT"); //종료
 
@@ -56,4 +60,36 @@ public class SocketClientSample {
 
     }
 
+
+    public void sendAndReceiveSocketData(String data) {
+
+        Socket socket = null;
+
+        try {
+            System.out.println("Clinet: Connecting");
+            socket = new Socket("127.0.0.1", 9998); // socket 객체 생성 후 접속
+            System.out.println("Client: Connect status=" + socket.isConnected());
+            Thread.sleep(1000);
+            byte[] readByte = new byte[256];
+
+            //서버에서 온 데이터를 받음
+            InputStream inputStream = socket.getInputStream();
+            BufferedInputStream in = new BufferedInputStream(inputStream);
+            in.read(readByte);
+            System.out.println("Client: received data +" + new String(readByte).trim());
+            in.close();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (socket != null) {
+                try {
+                    socket.close(); //서버와 연결 종료
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }
